@@ -1,0 +1,9 @@
+Package: com.accuratweaks.common
+Name: Accura Tweaks Common
+Version: 0.1
+Architecture: iphoneos-arm
+Description: This package contains common code shared by packages by Accura Tweaks.
+Maintainer: Simon Selg
+Author: Accura Tweaks
+Tag: role::developer
+Section: System
