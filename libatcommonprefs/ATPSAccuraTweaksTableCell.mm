@@ -150,7 +150,7 @@
 }
 @end
 
-@implementation ATPSAccuraTweaksTableCell {
+@implementation ATPSAccuraTweaksTableCell{
 	AccuraLogoView *_logoView;
 	AccuraTeamView *_teamView;
 	BOOL _showsLogo;

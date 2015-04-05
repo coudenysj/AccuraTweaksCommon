@@ -2,8 +2,9 @@
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSListController.h>
 #import <Preferences/PSTableCell.h>
+#import "ATPSTableCell.h"
 
-@interface ATPSWebViewTableCell : PSTableCell
+@interface ATPSWebViewTableCell : PSTableCell <ATPSTableCell>
 @end
 
 

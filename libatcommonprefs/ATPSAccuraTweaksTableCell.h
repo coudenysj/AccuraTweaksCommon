@@ -2,8 +2,9 @@
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
 #import "../UIView+ATAnimate.h"
+#import "ATPSTableCell.h"
 
-@interface ATPSAccuraTweaksTableCell : PSTableCell
+@interface ATPSAccuraTweaksTableCell : PSTableCell <ATPSTableCell>
 -(void)makeTransitionToTeam;
 -(void)makeTransitionToLogo;
 @end

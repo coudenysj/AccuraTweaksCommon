@@ -1,8 +1,9 @@
 #import <UIKit/UIKit.h>
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
+#import "ATPSTableCell.h"
 
-@interface ATPSSpinnerTableCell : PSTableCell
+@interface ATPSSpinnerTableCell : PSTableCell<ATPSTableCell>
 @end
 
 

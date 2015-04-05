@@ -1,9 +1,10 @@
 #import <UIKit/UIKit.h>
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
+#import "ATPSTableCell.h"
 #import "../ATColorExtensions.h"
 
-@interface ATPSColoredTableCell : PSTableCell
+@interface ATPSColoredTableCell : PSTableCell <ATPSTableCell>
 @end
 
 

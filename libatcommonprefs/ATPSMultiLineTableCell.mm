@@ -1,9 +1,10 @@
 #import <UIKit/UIKit.h>
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
+#import "ATPSTableCell.h"
 #import "../ATColorExtensions.h"
 
-@interface ATPSMultiLineTableCell : PSTableCell{
+@interface ATPSMultiLineTableCell : PSTableCell <ATPSTableCell>{
 	NSString* _labelText;
 	UILabel* _multiLineLabel;
 	CGFloat _fontSize;

@@ -1,14 +1,12 @@
 #import <UIKit/UIKit.h>
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSListController.h>
-#import <Preferences/PSHeaderFooterView.h>
 #import <Preferences/PSTextFieldSpecifier.h>
-#import <Preferences/PSHeaderFooterView.h>
 #import <Preferences/PSTableCell.h>
+#import "ATPSTableCell.h"
 
 
-
-@interface ATPSImageTableCell : PSTableCell <PSHeaderFooterView>
+@interface ATPSImageTableCell : PSTableCell <ATPSTableCell>
 @end
 
 

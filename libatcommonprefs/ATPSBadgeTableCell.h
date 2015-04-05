@@ -2,6 +2,7 @@
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
 #import "../ATColorExtensions.h"
+#import "ATPSTableCell.h"
 
 @interface ATBadgeView : UIView
 
@@ -15,7 +16,7 @@
 @end
 
 
-@interface ATPSBadgeTableCell : PSTableCell
+@interface ATPSBadgeTableCell : PSTableCell <ATPSTableCell>
 @property (nonatomic, retain)  NSString *badgeString;
 @property (nonatomic, retain)  ATBadgeView *badge;
 @property (nonatomic, retain)  UIColor *badgeColor;
