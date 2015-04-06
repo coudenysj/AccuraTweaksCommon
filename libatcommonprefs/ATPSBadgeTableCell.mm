@@ -92,8 +92,7 @@
 		//defaults
 		self.badgeHorizPadding = 6;
 		self.badgeVertPadding = 3;
-		self.badge.fontSize = 13.0;//self.textLabel.font.pointSize;
-    	self.badgeLeftMargin = 10;
+		self.badge.fontSize = 13.0;
 
     	[self.contentView addSubview:self.badge];
 
@@ -106,9 +105,14 @@
 {
 	[super layoutSubviews];
 
+    //badge stuff
+    self.badgeLeftMargin = [self.specifier.properties objectForKey:@"badgeLeftMargin"] ? [[self.specifier.properties objectForKey:@"badgeLeftMargin"]floatValue] : 10.0;
+    self.badgeRightMargin = [self.specifier.properties objectForKey:@"badgeLeftMargin"] ? [[self.specifier.properties objectForKey:@"badgeLeftMargin"]floatValue] : 10.0;
+
 	self.badgeString = [self.specifier.properties objectForKey:@"badgeString"];
 	self.badgeMakeRound = [self.specifier.properties objectForKey:@"badgeMakeRound"] ? [[self.specifier.properties objectForKey:@"badgeMakeRound"] boolValue] : YES;
 	self.badgeRadius = [[self.specifier.properties objectForKey:@"badgeRadius"] floatValue];
+    self.badgeAlignment = [self.specifier.properties objectForKey:@"badgeAlignment"];// ? [self.specifier.properties objectForKey:@"badgeAlignment"] : @"left";
 
 	id badgeColor = [self.specifier.properties objectForKey:@"badgeColor"];
 	id badgeTextColor = [self.specifier.properties objectForKey:@"badgeTextColor"];
@@ -143,31 +147,36 @@
         CGSize labelSize = [self.textLabel.text sizeWithAttributes:@{NSFontAttributeName:self.textLabel.font}];
 
         //todo: Add support for custom left margin
-        CGFloat badgeX = self.textLabel.frame.origin.x + 10 + labelSize.width;
+        CGRect badgeframe;
+        if([self.badgeAlignment isEqualToString:@"right"]){
+            CGFloat contentViewWidth = self.contentView.bounds.size.width - self.badgeRightMargin;
 
+            //right aligned
+            CGFloat badgeMinX = self.textLabel.frame.origin.x + labelSize.width + self.badgeLeftMargin;
+            CGFloat badgeX = contentViewWidth - (badgeSize.width + 2*self.badgeHorizPadding);
+            if(badgeX < badgeMinX){
+                badgeX = badgeMinX;
+            }
 
-        CGRect badgeframe = CGRectMake(badgeX, round((self.contentView.frame.size.height - (badgeSize.height + 2*self.badgeVertPadding)) / 2),
-									   badgeSize.width + 2*(self.badgeHorizPadding),
+            badgeframe = CGRectMake(badgeX, round((self.contentView.frame.size.height - (badgeSize.height + 2*self.badgeVertPadding)) / 2),
+                                      contentViewWidth - badgeX,
                                        badgeSize.height + 2*self.badgeVertPadding);
 
-        //now. If badge does not fit, make it smaller.
-        if((badgeframe.origin.x + badgeframe.size.width) > self.contentView.frame.size.width){
+        }else{
+            //left
+            CGFloat badgeX = self.textLabel.frame.origin.x + self.badgeLeftMargin + labelSize.width;
+            CGFloat badgeMaxX = self.contentView.bounds.size.width - self.badgeRightMargin;
 
-        	//support for replacing text. should add a 2nd option in the sepecifier
-        	if([self.badgeString isEqual:@"New update available!"]){
-        		self.badgeString = @"New update!";
-        		badgeSize = [self.badgeString sizeWithAttributes:@{ NSFontAttributeName:font }];
+            CGFloat badgeWidth = badgeSize.width + 2*self.badgeHorizPadding;
+            if((badgeWidth + badgeX) > badgeMaxX){
+                badgeWidth = (badgeMaxX - badgeX);
+            }
 
-        		badgeframe = CGRectMake(badgeX, round((self.contentView.frame.size.height - (badgeSize.height + 2*self.badgeVertPadding)) / 2),
-									   badgeSize.width + 2*(self.badgeHorizPadding),
+            badgeframe = CGRectMake(badgeX, round((self.contentView.frame.size.height - (badgeSize.height + 2*self.badgeVertPadding)) / 2),
+                                       badgeWidth,
                                        badgeSize.height + 2*self.badgeVertPadding);
-        		if((badgeframe.origin.x + badgeframe.size.width) > self.contentView.frame.size.width){
-        			badgeframe.size.width = (self.contentView.frame.size.width - 2*self.badgeLeftMargin - badgeframe.origin.x);
-        		}
-        	}else{
-        		badgeframe.size.width = (self.contentView.frame.size.width - 2*self.badgeLeftMargin - badgeframe.origin.x);
-        	}
         }
+
 
         if(self.badgeMakeRound){
         	self.badgeRadius = badgeframe.size.height/2;

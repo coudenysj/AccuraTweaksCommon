@@ -24,6 +24,8 @@
 @property (nonatomic, assign)  CGFloat badgeHorizPadding;
 @property (nonatomic, assign)  CGFloat badgeVertPadding;
 @property (nonatomic, assign)  CGFloat badgeLeftMargin;
+@property (nonatomic, assign)  CGFloat badgeRightMargin;
 @property (nonatomic, assign)  BOOL badgeMakeRound;
 @property (nonatomic, assign)  CGFloat badgeRadius;
+@property (nonatomic, assign)  NSString* badgeAlignment;
 @end

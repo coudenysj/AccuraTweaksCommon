@@ -1,6 +1,6 @@
-#import "ATColorExtensions.h"
+#import "UIColor+ATExtension.h"
 
-@implementation UIColor (ATColorExtensions)
+@implementation UIColor (ATExtension)
 
 + (NSDictionary *)ATStandardColors
 {
