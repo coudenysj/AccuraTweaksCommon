@@ -20,7 +20,7 @@ typedef struct ATColorCubeCell {
 @end
 
 @implementation UIImage(ATExtension)
-- (NSArray *)findLocalMaxima
+- (NSArray *)findMostUsedColors
 {
 	//this is based on the idea from here: http://www.pixelogik.de/blog/local-maxima-in-color-histogram
 
@@ -178,13 +178,13 @@ typedef struct ATColorCubeCell {
 - (NSArray *)ATExtractColors
 {
 	//returns the most used colors of the image, sorted by usage
-    return  [self findLocalMaxima];
+    return  [self findMostUsedColors];
 }
 
 - (NSArray *)ATMainColor
 {
     //returns the most used color of the image
-    return [self findLocalMaxima][0];
+    return [self findMostUsedColors][0];
 }
 
 
