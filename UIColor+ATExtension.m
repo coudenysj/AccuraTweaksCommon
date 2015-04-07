@@ -119,31 +119,79 @@
 	CGFloat alpha = (rgba & 0x000000FF) / 255.0f;
 	return [self initWithRed:red green:green blue:blue alpha:alpha];
 }
+-(CGFloat)ATBrightness{
+    /*CGFloat hue, saturation, brightness, alpha;
+    [self getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    return brightness;*/
 
-/*- (CGFloat)redValue
+    //todo: verify that's acutually correct!
+    CGFloat b = (self.ATRedComponent * 0.3 + self.ATGreenComponent * 0.59 + self.ATBlueComponent * 0.11);
+    return b;
+}
+
+- (CGFloat)ATRedComponent
 {
     CGFloat rgba[4];
-    [self getRGBAComponents:rgba];
+    [self ATGetRGBAComponents:rgba];
 	return rgba[0];
 }
 
-- (CGFloat)greenValue
+- (CGFloat)ATGreenComponent
 {
     CGFloat rgba[4];
-    [self getRGBAComponents:rgba];
+    [self ATGetRGBAComponents:rgba];
 	return rgba[1];
 }
 
-- (CGFloat)blueValue
+- (CGFloat)ATBlueComponent
 {
     CGFloat rgba[4];
-    [self getRGBAComponents:rgba];
+    [self ATGetRGBAComponents:rgba];
 	return rgba[2];
 }
 
-- (CGFloat)alphaValue
+- (CGFloat)ATAlphaComponent
 {
     return CGColorGetAlpha(self.CGColor);
-}*/
+}
+
+
+- (void)ATGetRGBAComponents:(CGFloat[4])rgba
+{
+    CGColorSpaceModel model = CGColorSpaceGetModel(CGColorGetColorSpace(self.CGColor));
+    const CGFloat *components = CGColorGetComponents(self.CGColor);
+    switch (model)
+    {
+        case kCGColorSpaceModelMonochrome:
+        {
+            rgba[0] = components[0];
+            rgba[1] = components[0];
+            rgba[2] = components[0];
+            rgba[3] = components[1];
+            break;
+        }
+        case kCGColorSpaceModelRGB:
+        {
+            rgba[0] = components[0];
+            rgba[1] = components[1];
+            rgba[2] = components[2];
+            rgba[3] = components[3];
+            break;
+        }
+        case kCGColorSpaceModelCMYK:
+        case kCGColorSpaceModelDeviceN:
+        case kCGColorSpaceModelIndexed:
+        case kCGColorSpaceModelLab:
+        case kCGColorSpaceModelPattern:
+        case kCGColorSpaceModelUnknown:
+        {
+            rgba[0] = 0.0f;
+            rgba[1] = 0.0f;
+            rgba[2] = 0.0f;
+            rgba[3] = 1.0f;
+            break;
+        }
+    }
+}
 
 @end

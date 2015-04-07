@@ -2,10 +2,12 @@
 
 
 @interface UIColor (ATExtension)
-/*@property (nonatomic, readonly) CGFloat redValue;
-@property (nonatomic, readonly) CGFloat greenValue;
-@property (nonatomic, readonly) CGFloat blueValue;
-@property (nonatomic, readonly) CGFloat alphaValue;*/
+- (CGFloat) ATRedComponent;
+- (CGFloat) ATGreenComponent;
+- (CGFloat) ATBlueComponent;
+- (CGFloat) ATAlphaComponent;
+- (void)ATGetRGBAComponents:(CGFloat[4])rgba;
+- (CGFloat)ATBrightness;
 
 + (instancetype)ATColorWithString:(NSString *)string;
 + (instancetype)ATColorWithRGBValue:(uint32_t)rgb;

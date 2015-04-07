@@ -40,6 +40,13 @@
 	[badgeLayer setBackgroundColor:[color CGColor]];
 	[badgeLayer setCornerRadius:self.radius];
 
+    if(self.badgeBorderColor){
+        [badgeLayer setBorderWidth:self.badgeBorderWidth];
+        [badgeLayer setBorderColor:self.badgeBorderColor.CGColor];
+    }else{
+        [badgeLayer setBorderWidth:0];
+    }
+
     UIGraphicsBeginImageContextWithOptions(badgeLayer.frame.size, NO, scale);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -90,8 +97,8 @@
 		self.badge = [[ATBadgeView alloc] initWithFrame:CGRectZero];
 
 		//defaults
-		self.badgeHorizPadding = 6;
-		self.badgeVertPadding = 3;
+		_defaultBadgeHorizPadding = 6;
+		_defaultBadgeVertPadding = 3;
 		self.badge.fontSize = 13.0;
 
     	[self.contentView addSubview:self.badge];
@@ -113,9 +120,12 @@
 	self.badgeMakeRound = [self.specifier.properties objectForKey:@"badgeMakeRound"] ? [[self.specifier.properties objectForKey:@"badgeMakeRound"] boolValue] : YES;
 	self.badgeRadius = [[self.specifier.properties objectForKey:@"badgeRadius"] floatValue];
     self.badgeAlignment = [self.specifier.properties objectForKey:@"badgeAlignment"];// ? [self.specifier.properties objectForKey:@"badgeAlignment"] : @"left";
+    self.badgeBorderWidth = [self.specifier.properties objectForKey:@"badgeBorderWidth"] ? [[self.specifier.properties objectForKey:@"badgeBorderWidth"] floatValue] : 2;
 
-	id badgeColor = [self.specifier.properties objectForKey:@"badgeColor"];
+
+    id badgeColor = [self.specifier.properties objectForKey:@"badgeColor"];
 	id badgeTextColor = [self.specifier.properties objectForKey:@"badgeTextColor"];
+    id badgeBorderColor = [self.specifier.properties objectForKey:@"badgeBorderColor"];
 
 	if([badgeColor isKindOfClass:[UIColor class]]){
 		self.badgeColor = badgeColor;
@@ -132,6 +142,20 @@
 	}else{
 		self.badgeTextColor = nil;
 	}
+
+    if([badgeBorderColor isKindOfClass:[UIColor class]]){
+        self.badgeBorderColor = badgeBorderColor;
+    }else if([badgeBorderColor isKindOfClass:[NSString class]]){
+        self.badgeBorderColor = [UIColor ATColorWithString:badgeBorderColor];
+    }else{
+        self.badgeBorderColor = nil;
+    }
+
+    if(!self.badgeBorderColor){
+        self.badgeBorderWidth = 0;
+    }
+    self.badgeHorizPadding = _defaultBadgeHorizPadding + self.badgeBorderWidth;
+    self.badgeVertPadding = _defaultBadgeVertPadding + self.badgeBorderWidth;
 
 
 	if(self.badgeString && ![self.badgeString isEqual:@""])
@@ -194,7 +218,9 @@
  		//set badge colors or force it to use defaults
 		self.badge.badgeColor = self.badgeColor;
 		self.badge.badgeTextColor = self.badgeTextColor;
+        self.badge.badgeBorderColor = self.badgeBorderColor;
 		self.badge.radius = self.badgeRadius;
+        self.badge.badgeBorderWidth = self.badgeBorderWidth;
 		[self.badge setNeedsDisplay];
 
     }

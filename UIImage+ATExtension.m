@@ -86,7 +86,7 @@ typedef struct ATColorCubeCell {
         alpha  = (double)rawData[k*4+3]/255.0;
 
         //only care about visible colors for now
-        if(alpha > 0){
+        if(alpha == 1){
         	redIndex   = (int)(red*(cubeSize-1.0));
 	        greenIndex = (int)(green*(cubeSize-1.0));
 	        blueIndex  = (int)(blue*(cubeSize-1.0));
@@ -214,6 +214,7 @@ typedef struct ATColorCubeCell {
                                alpha:((CGFloat)rgba[3])/255.0];
     }
 }
+
 
 - (unsigned char *)rawPixelDataWithPixelCount:(unsigned int*)pixelCountPtr
 {
