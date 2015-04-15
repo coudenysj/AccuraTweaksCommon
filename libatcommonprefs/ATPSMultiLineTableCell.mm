@@ -2,7 +2,7 @@
 #import <Preferences/PSSpecifier.h>
 #import <Preferences/PSTableCell.h>
 #import "ATPSTableCell.h"
-#import "../ATColorExtensions.h"
+#import "../UIColor+ATExtension.h"
 
 @interface ATPSMultiLineTableCell : PSTableCell <ATPSTableCell>{
 	NSString* _labelText;

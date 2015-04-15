@@ -1,6 +1,6 @@
 Package: com.accuratweaks.common
 Name: Accura Tweaks Common
-Version: 0.1
+Version: 1.3
 Architecture: iphoneos-arm
 Description: This package contains common code shared by packages by Accura Tweaks.
 Maintainer: Simon Selg

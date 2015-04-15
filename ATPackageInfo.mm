@@ -70,7 +70,10 @@
 		        }
 		    }
 	    }
+	    pclose(f);
 	}
+
+	
 
     return _packageDetail;
 }
