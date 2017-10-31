@@ -1,6 +1,6 @@
 Shared code used by multiple Accura Tweaks ([@AccuraTweaks](http://twitter.com/accuratweaks/)) products, like *QRMode* and *Package Notifier*. *Requires ARC*.
 
-This does not nessesary repersent the latetst version that is available in Cydia.
+This does not nessesary repersent the latest version that is available in Cydia.
 
 **Contains**
 - Custom Preference Cells (check the libatcommonprefs folder!)
